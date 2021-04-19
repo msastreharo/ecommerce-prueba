@@ -48,6 +48,9 @@ public class Main {
                 // When reading is complete, close reader
                 reader.close();
             }
+            // Using parse method
+            // parse(responseContent.toString());
+
         System.out.println(responseContent.toString());
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -62,8 +65,10 @@ public class Main {
     public static String parse(String responseBody) {
         JSONArray products = new JSONArray(responseBody);
 
-        for (int i = 0; i <= products.length(); i++) {
-            JSONObject productList = products.getJSONObject(i);
+        for (JSONObject product: products) {
+            JSONObject productList = products.getJSONObject();
+
+            // Get individual fields (name, id, description...)
             int id = productList.getInt("id");
             String brand = productList.getString("brand");
             String name = productList.getString("name");
@@ -73,6 +78,7 @@ public class Main {
             String productType = productList.getString("product_type");
             System.out.println("ID =" + id + ", Name =" + name + ", brand =" + brand + ", price =" + price + ", description = " + description);
         }
+        return null;
     }
 
 }
