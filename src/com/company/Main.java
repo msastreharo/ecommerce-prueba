@@ -1,5 +1,7 @@
 package com.company;
 
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -55,4 +57,22 @@ public class Main {
             connection.disconnect();
         }
     }
+
+    // Parse method
+    public static String parse(String responseBody) {
+        JSONArray products = new JSONArray(responseBody);
+
+        for (int i = 0; i <= products.length(); i++) {
+            JSONObject productList = products.getJSONObject(i);
+            int id = productList.getInt("id");
+            String brand = productList.getString("brand");
+            String name = productList.getString("name");
+            double price = productList.getDouble("price");
+            String image = productList.getString("image_link");
+            String description = productList.getString("description");
+            String productType = productList.getString("product_type");
+            System.out.println("ID =" + id + ", Name =" + name + ", brand =" + brand + ", price =" + price + ", description = " + description);
+        }
+    }
+
 }
